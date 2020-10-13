@@ -1,4 +1,5 @@
 const express = require('express')
+const dBModule = require('./mongoDBTest')
 const app = express()
 const port = 3000
 
@@ -13,13 +14,14 @@ app.get('/style', (req, res) =>{
     res.sendFile(clientDir + "index.css")
 })
 
-app.get('/inlog', (req, res) =>{
+app.get('/Bild', (req, res) =>{
     res.sendFile(clientDir + "welcome.jpg")
 })
 
 app.post('/', (req, res) => {
-    console.log(req.body.name)
-    console.log(req.body.email)
+  dBModule.storePerson(req.body.name, req.body.email, req.body.age)
+
+  res.redirect('/')
 })
 
 app.get('/teknik', (req, res) => res.send('EK sux'))

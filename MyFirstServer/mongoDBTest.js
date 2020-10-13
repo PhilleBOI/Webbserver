@@ -1,40 +1,28 @@
-// getting-started.js
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/webshop', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', function () {
     // we're connected!
 });
 
-const kittySchema = new mongoose.Schema({
-    name: String
-})
-
-const Kitten = mongoose.model('Kitten', kittySchema);
-
-// NOTE: methods must be added to the schema before compiling it with mongoose.model()
-kittySchema.methods.speak = function () {
-    const greeting = this.name
-      ? "Meow name is " + this.name
-      : "I don't have a name";
-    console.log(greeting);
-}
-
-const Kitten = mongoose.model('Kitten', kittySchema);
-
-const fluffy = new Kitten({ name: 'fluffy' });
-fluffy.speak(); // "Meow name is fluffy"
-
-fluffy.save(function (err, fluffy) {
-    if (err) return console.error(err);
-    fluffy.speak();
+const personSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number
 });
 
-Kitten.find(function (err, kitten) {
-    if (err) return console.error(err);
-    console.log(kittens);
-})
+const Person = mongoose.model('Person', personSchema);
 
-Kitten.find({ name: /^fluff/ }, callback);
+exports.storePerson = (name, email, age) => {
+    var person = new Person({
+        name: name, 
+        email: email, 
+        age: age 
+       })
+   
+     person.save(()=>{
+       console.log("Successfully saved person in database!")
+     })
+}

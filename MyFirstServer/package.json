@@ -1,17 +1,18 @@
 {
-  "name": "MyFirstServer",
+  "name": "demo_server",
   "version": "1.0.0",
-  "description": "Hej",
+  "description": "This is a server!",
   "main": "app.js",
   "scripts": {
-    "devStart": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Niklas",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.10.5"
+    "mongoose": "^5.10.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
