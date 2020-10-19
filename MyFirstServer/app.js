@@ -7,8 +7,11 @@ const clientDir = __dirname + "\\client\\"
 
 app.use(express.json())
 app.use(express.urlencoded())
+app.use(express.static(clientDir))
 
-app.get('/', (req, res) => res.sendFile(clientDir + "index.html"))
+app.set('view engene', 'ejs')
+
+app.get('/', (req, res) => res.sendFile(clientDir + "index.ejs"))
 
 app.get('/style', (req, res) =>{
     res.sendFile(clientDir + "index.css")
@@ -18,7 +21,16 @@ app.get('/Bild', (req, res) =>{
     res.sendFile(clientDir + "welcome.jpg")
 })
 
+const nameList = ['Niklas', 'Petter', 'Ludde', 'Olle', 'OggeP'];
+
+app.get('/messages', async (req, res) => {
+  let messages = await messagesModel.getAllMessages()
+  res.render("pages/massages.ejs", {names: nameList})
+})
+
 app.post('/', (req, res) => {
+  let person = personModel.newPerson(req.body.name, req.body.email, req.body.age)
+  dBModule.storeElement(persone)
   dBModule.storePerson(req.body.name, req.body.email, req.body.age)
 
   res.redirect('/')

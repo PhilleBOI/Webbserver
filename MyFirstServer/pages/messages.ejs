@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My webbsite</title>
+
+</head>
+<body>
+    <div id="header"> 
+        <h1>Hey kompis :)</h1>
+    </div>
+
+    <img src="welcome.jpg" alt="Välkomen" width="400" height="300">
+    
+    <form action="/postmessage" method="post">
+        <input type="email" name="email" id="Email" placeholder="Email">
+        <input type="text" name="age" placeholder="Age">
+        <input type="number" name="messages" placeholder="messages">
+        
+        <button type="submit">Logga in</button> 
+    </form>
+    <% for( let i = 0; i < name.lenght; i++ ) { %>
+        <h1><%- messages[i].email %> </h1>
+    <% } %>
+</body>
+</html>

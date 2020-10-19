@@ -5,5 +5,3 @@ const personSchema = new mongoose.Schema({
     email: String,
     age: Number
   });
-
-  
