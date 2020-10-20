@@ -1,5 +1,6 @@
 const express = require('express')
 const dBModule = require('./mongoDBTest')
+const { storePerson } = require('./Person')
 const app = express()
 const port = 3000
 
@@ -11,14 +12,16 @@ app.use(express.static(clientDir))
 
 app.set('view engene', 'ejs')
 
-app.get('/', (req, res) => res.sendFile(clientDir + "index.ejs"))
-
-app.get('/style', (req, res) =>{
-    res.sendFile(clientDir + "index.css")
+app.get('/', (req, res) => { 
+res.sendFile(clientDir + "./index.html")
 })
 
-app.get('/Bild', (req, res) =>{
-    res.sendFile(clientDir + "welcome.jpg")
+app.get('/style', (req, res) => {
+    res.sendFile(clientDir + "./index.css")
+})
+
+app.get('/bild', (req, res) => {
+    res.sendFile(clientDir + "./welcome.jpg")
 })
 
 const nameList = ['Niklas', 'Petter', 'Ludde', 'Olle', 'OggeP'];
@@ -29,9 +32,8 @@ app.get('/messages', async (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  let person = personModel.newPerson(req.body.name, req.body.email, req.body.age)
-  dBModule.storeElement(persone)
-  dBModule.storePerson(req.body.name, req.body.email, req.body.age)
+  let person = storePerson(req.body.name, req.body.email, req.body.age)
+  dBModule.storeElement(person)
 
   res.redirect('/')
 })
